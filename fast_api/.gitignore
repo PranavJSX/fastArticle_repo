@@ -24,3 +24,36 @@ Thumbs.db
 # Database / local storage (if added later)
 *.sqlite3
 *.db
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python Bytecode & Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# SQLite Database Files
+*.db
+*.sqlite3
+blog.db
+
+# Environment Variables & Secrets
+.env
+.env.*
+
+# VS Code Settings & Cache
+.vscode/
+*.swp
+*.swo
+
+# OS Generated Files
+.DS_Store
+Thumbs.db

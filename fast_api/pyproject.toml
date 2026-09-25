@@ -9,6 +9,11 @@ authors = [
 requires-python = ">=3.9"
 dependencies = [
     "fastapi[standard]>=0.128.8",
+    "greenlet==3.0.3",
+    "pydantic>=2.13.5",
+    "pylint>=3.3.9",
+    "sqlalchemy==2.0.54",
+    "uvicorn>=0.39.0",
 ]
 
 [project.scripts]
