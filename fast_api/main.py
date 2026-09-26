@@ -1,5 +1,5 @@
 """Main application entry point for FastAPI."""
-
+from __future__ import annotations
 from fastapi import FastAPI, Request, HTTPException, status, Depends
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse

@@ -1,7 +1,8 @@
 ## models.py
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import datetime, timezone
+from typing import Optional
 
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -15,7 +16,7 @@ class User(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
-    image_file: Mapped[str | None] = mapped_column(
+    image_file: Mapped[Optional[str]] = mapped_column(
         String(200),
         nullable=True,
         default=None,
@@ -43,7 +44,7 @@ class Post(Base):
     )
     date_posted: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=lambda: datetime.now(UTC),
+        default=lambda: datetime.now(timezone.utc),
     )
 
     author: Mapped[User] = relationship(back_populates="posts")
