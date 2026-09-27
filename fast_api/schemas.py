@@ -9,6 +9,8 @@ class UserBase(BaseModel):
     username: str = Field(min_length=1, max_length=50)
     email: EmailStr = Field(max_length=120)
 
+
+
 class UserCreate(UserBase):
     pass
 
@@ -18,6 +20,11 @@ class UserResponse(UserBase):
     id: int
     image_file: Optional[str] = None
     image_path: str
+
+class UserUpdate(BaseModel):
+    username: Optional[str] = Field(default=None, min_length=1, max_length=50)
+    email: Optional[EmailStr] = Field(default=None, max_length=120)
+    image_file: Optional[str] = Field(default=None, min_length=1, max_length=200)
 
 
 
@@ -37,3 +44,8 @@ class PostResponse(PostBase):
     user_id: int
     date_posted: datetime
     author: UserResponse
+
+class PostUpdate(BaseModel):
+    title: Optional[str] = Field(default=None, min_length=1, max_length=100)
+    content: Optional[str] = Field(default=None, min_length=1)
+
