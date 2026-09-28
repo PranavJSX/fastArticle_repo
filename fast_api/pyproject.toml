@@ -1,0 +1,25 @@
+[project]
+name = "fast-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "manuo", email = "ojhapranav1999@gmail.com" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "aiosqlite>=0.22.1",
+    "fastapi[standard]>=0.128.8",
+    "greenlet==3.0.3",
+    "pydantic>=2.13.5",
+    "pylint>=3.3.9",
+    "sqlalchemy==2.0.54",
+    "uvicorn>=0.39.0",
+]
+
+[project.scripts]
+fast-api = "fast_api:main"
+
+[build-system]
+requires = ["uv_build>=0.12.15,<0.13.0"]
+build-backend = "uv_build"
