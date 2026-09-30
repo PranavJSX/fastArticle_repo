@@ -8,7 +8,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload 
 from sqlalchemy import select
-from schemas import  UserResponse
+from schemas import UserPublic
 from typing import Annotated
 import models
 from database import Base, engine, get_db
@@ -26,7 +26,7 @@ async def lifespan(_app:FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 BASE_DIR = Path(__file__).resolve().parent
-app = FastAPI()
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/media", StaticFiles(directory="media"), name="media")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
@@ -70,7 +70,7 @@ async def home(request: Request, db: Annotated[AsyncSession, Depends(get_db)]):
 
 @app.post(
     "/api/users",
-    response_model=UserResponse,
+    response_model=UserPublic,
     status_code=status.HTTP_201_CREATED,
 )
 
@@ -119,6 +119,24 @@ async def post_page(request: Request, post_id: int, db: Annotated[AsyncSession, 
             {"post": post, "title": title},
         )
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
+
+## login and register template_routes
+@app.get("/login", include_in_schema=False)
+async def login_page(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "login.html",
+        {"title": "Login"},
+    )
+
+
+@app.get("/register", include_in_schema=False)
+async def register_page(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "register.html",
+        {"title": "Register"},
+    )
 
 @app.exception_handler(StarletteHTTPException)
 async def general_http_exception_handler(request: Request, exception: StarletteHTTPException):
